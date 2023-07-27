@@ -49,6 +49,7 @@ def _setup_chroma_vamp():
             print(f'autochord: Using NNLS-Chroma VAMP plugin in {path}')
             return
         except Exception as e:
+            print(e)
             continue
 
     print(f'autochord WARNING: NNLS-Chroma VAMP plugin not setup properly. '
