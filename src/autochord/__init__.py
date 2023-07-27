@@ -42,7 +42,6 @@ def _setup_chroma_vamp():
         print(f'autochord: Using NNLS-Chroma VAMP plugin in {path}')
     except Exception as e:
         print(f'setup error: {e}')
-        continue
 
 def _download_model():
     os.makedirs(_EXT_RES_DIR, exist_ok=True)
