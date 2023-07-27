@@ -36,24 +36,13 @@ _MAJMIN_CLASSES = [_NO_CHORD, *[f'{note}:maj' for note in _CHROMA_NOTES],
 ##############
 def _setup_chroma_vamp():
     # pylint: disable=c-extension-no-member
-    vamp_paths = vamp.vampyhost.get_plugin_path()
-    vamp_lib_fn = os.path.basename(_CHROMA_VAMP_LIB)
-    for path in vamp_paths:
-        try:
-            if not os.path.exists(os.path.join(path, vamp_lib_fn)):
-                os.makedirs(path, exist_ok=True)
-                copy(_CHROMA_VAMP_LIB, path)
-            # try to load to confirm if configured correctly
-            vamp.vampyhost.load_plugin(_CHROMA_VAMP_KEY, _SAMPLE_RATE,
-                                       vamp.vampyhost.ADAPT_NONE)
-            print(f'autochord: Using NNLS-Chroma VAMP plugin in {path}')
-            return
-        except Exception as e:
-            print(f'setup error: {e}')
-            continue
-
-    print(f'autochord WARNING: NNLS-Chroma VAMP plugin not setup properly. '
-          f'Try copying `{_CHROMA_VAMP_LIB}` in any of following directories: {vamp_paths}')
+    try:
+        vamp.vampyhost.load_plugin(_CHROMA_VAMP_KEY, _SAMPLE_RATE,
+                                   vamp.vampyhost.ADAPT_NONE)
+        print(f'autochord: Using NNLS-Chroma VAMP plugin in {path}')
+    except Exception as e:
+        print(f'setup error: {e}')
+        continue
 
 def _download_model():
     os.makedirs(_EXT_RES_DIR, exist_ok=True)
