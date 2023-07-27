@@ -39,7 +39,6 @@ def _setup_chroma_vamp():
     try:
         vamp.vampyhost.load_plugin(_CHROMA_VAMP_KEY, _SAMPLE_RATE,
                                    vamp.vampyhost.ADAPT_NONE)
-        print(f'autochord: Using NNLS-Chroma VAMP plugin in {path}')
     except Exception as e:
         print(f'setup error: {e}')
 
